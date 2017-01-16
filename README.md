@@ -21,3 +21,10 @@ The sum of all the medians is:
 ```
 
 once the application completes.
+
+
+## Under the hood
+
+Median stream uses a max heap and a min heap for median maintenance. This allows new
+integers to be added with a time complexity relative to the logarithm of half the total
+number of inputs, and it allows the median to be found in constant time.
