@@ -6,10 +6,13 @@ import (
 	"github.com/rhinodavid/medianstream/intheap"
 )
 
+// MedianKeeper is a structure designed to find the median of a series of
+// integers in an efficient manner.
 type MedianKeeper struct {
 	l, h *intheap.IntHeap
 }
 
+// New creates and intializes a new MedianKeeper
 func New() *MedianKeeper {
 	var k MedianKeeper
 	k.l = &intheap.IntHeap{}
@@ -19,6 +22,8 @@ func New() *MedianKeeper {
 	return &k
 }
 
+// Push adds a new integer to the structure. Runs in logarithmic time
+// with respect to the total number of integers added
 func (k *MedianKeeper) Push(x int) {
 	if k.l.Len() == 0 && k.h.Len() == 0 {
 		// first item
@@ -57,6 +62,10 @@ func (k *MedianKeeper) Push(x int) {
 	}
 }
 
+// Median returns the median of the integers inserted into the structure.
+// If there is an even number of integers, it returns the smaller of the
+// two medians. Runs in constant time with respect to the total number of
+// integers inserted.
 func (k *MedianKeeper) Median() int {
 	return k.l.Peek().(int) * -1
 }
